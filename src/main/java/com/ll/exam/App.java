@@ -1,5 +1,8 @@
 package com.ll.exam;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -9,6 +12,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         // 가장 마지막 명언글의 번호
+        List<WiseSaying> wiseSayings = new ArrayList<>();
         int wiseSayingLastId = 0;
 
 
@@ -26,9 +30,17 @@ public class App {
                     int id = ++wiseSayingLastId; // 명언 글 번호 증가
 
                     WiseSaying wiseSaying = new WiseSaying(id, content, author); // 입력받은 후 하나의 클래스로 통합 관리
-                    System.out.println(wiseSaying);
+                    wiseSayings.add(wiseSaying);
 
                     System.out.printf("%d번 명언이 등록되었습니다.\n", id);
+                    break;
+                case "목록":
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("-------------------");
+                    for (int i = wiseSayings.size() - 1; i >= 0; i--) {
+                        WiseSaying wiseSaying_ = wiseSayings.get(i);
+                        System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.author);
+                    }
                     break;
                 case "종료":
                     break outer;
