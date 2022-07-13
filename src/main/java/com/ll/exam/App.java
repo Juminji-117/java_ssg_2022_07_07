@@ -12,7 +12,7 @@ public class App {
     public void run() {
         System.out.println("== 명언 SSG ==");
 
-        WiseSayingController wiseSayingController = new WiseSayingController(sc);
+        WiseSayingController wiseSayingController = new WiseSayingController(sc); // controller 생성자에 인자로 넣어주기 위해
 
         outer:
         while (true) {
