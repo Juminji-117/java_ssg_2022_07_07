@@ -1,34 +1,24 @@
 package com.ll.exam;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
-    private List<WiseSaying> wiseSayings;
-    private int wiseSayingLastId;
-    private Scanner sc;
 
+    private Scanner sc;
+    private WiseSayingRepository wiseSayingRepository;
+
+    //생성자
     WiseSayingController(Scanner sc) {
         this.sc = sc;
-        wiseSayings = new ArrayList<>();
-        wiseSayingLastId=0;
+        wiseSayingRepository = new WiseSayingRepository();
 
     }
-    private WiseSaying findById(int paramId) {
-        for (WiseSaying wiseSaying : wiseSayings) {
-            if (wiseSaying.id == paramId) {
-                return wiseSaying;
-            }
-        }
 
-        return null;
-    }
     public void list(Rq rq) {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("--------------------");
-        for (int i = wiseSayings.size() - 1; i >= 0; i--) { // last_index = size - 1
-            WiseSaying wiseSaying_ = wiseSayings.get(i); // wiseSaying_ 객체에 넣어서 출력
+        for (int i = wiseSayingRepository.wiseSayings.size() - 1; i >= 0; i--) { // last_index = size - 1
+            WiseSaying wiseSaying_ = wiseSayingRepository.wiseSayings.get(i); // wiseSaying_ 객체에 넣어서 출력
             System.out.printf("%d / %s / %s \n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.author);
         }
     }
@@ -40,11 +30,11 @@ public class WiseSayingController {
             String content = sc.nextLine().trim(); // trim()으로 시작과 끝 공백 제거, 중간 공백은 제거 불가
             System.out.printf("작가 : ");
             String author = sc.nextLine().trim();
-            int id = ++wiseSayingLastId; // 명언 글 번호 증가
+            int id = ++wiseSayingRepository.wiseSayingLastId; // 명언 글 번호 증가
 
             //2.wiseSaying 객체 생성 및 add
             WiseSaying wiseSaying = new WiseSaying(id, content, author);
-            wiseSayings.add(wiseSaying);
+            wiseSayingRepository.wiseSayings.add(wiseSaying);
 
             //3.해당 id 등록 완료 멘트
             System.out.printf("%d번 명언이 등록되었습니다.\n", id);
@@ -62,7 +52,7 @@ public class WiseSayingController {
             }
 
             //2-1.url에 입력된 id에 해당하는 명언객체 찾기
-            WiseSaying foundWiseSaying = findById(paramId);
+            WiseSaying foundWiseSaying = wiseSayingRepository.findById(paramId);
 
             //2-2.찾지 못했다면 중지
             if (foundWiseSaying == null) {
@@ -96,7 +86,7 @@ public class WiseSayingController {
             }
 
             //2-1.URL에 입력된 id에 해당하는 명언 객체 찾기
-            WiseSaying foundWiseSaying = findById(paramId);
+            WiseSaying foundWiseSaying = wiseSayingRepository.findById(paramId);
 
             //2-2.찾지 못했다면 중지
             if(foundWiseSaying == null) {
@@ -105,7 +95,7 @@ public class WiseSayingController {
             }
 
             //3.입력된 id에 해당하는 명언 객체를 리스트에서 삭제
-            wiseSayings.remove(foundWiseSaying);
+            wiseSayingRepository.wiseSayings.remove(foundWiseSaying);
 
             System.out.printf("%d번 명언이 삭제되었습니다.\n", paramId);
         }
