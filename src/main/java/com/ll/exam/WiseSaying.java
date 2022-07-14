@@ -46,6 +46,7 @@ public class WiseSaying {
                 .trim();
 
     }
+    //equals()와 hashCode()는 FileDBTest에서만 사용 -> TDD 진행 안할 시 필요 X
     /*
     직접 구현 ver.equals()
 
