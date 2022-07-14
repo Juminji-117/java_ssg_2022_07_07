@@ -35,6 +35,7 @@ public class Util {
 
             String line = null;
             while ((line = reader.readLine()) != null) {
+                //파일에서 텍스트 읽어올 때 한글 깨짐 현상 해결
                 body += new String(line.getBytes("iso-8859-1"), "utf-8") + "\n";
             }
 
