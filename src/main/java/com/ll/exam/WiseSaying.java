@@ -11,6 +11,7 @@ public class WiseSaying {
         this.author = author;
     }
 
+    //모든 객체를 문자열로 변환
     @Override
     public String toString() {
         return "WiseSaying{" +
@@ -18,5 +19,20 @@ public class WiseSaying {
                 ", content='" + content + '\'' +
                 ", author='" + author + '\'' +
                 '}';
+    }
+
+    //Json 형태로 변환
+   public String toJson() {
+        return """
+                {
+                    "id": %d,
+                    "content": "%s",
+                    "author": "%s"
+                }
+                """
+                .stripIndent()
+                .formatted(id, content, author)
+                .trim();
+
     }
 }

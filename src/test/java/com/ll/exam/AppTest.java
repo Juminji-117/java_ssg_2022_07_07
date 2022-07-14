@@ -6,6 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
     @Test
+    void 파일에_객체를_저장() {
+        Util.mkdir("test_data");
+        WiseSaying wiseSaying = new WiseSaying(1, "내 사전에 불가능은 없다.", "나폴레옹");
+        Util.saveToFile("test_data/1.json", wiseSaying.toJson());
+
+        String rs = Util.readFromFile("test_data/1.json");
+
+        assertEquals(wiseSaying.toJson(), rs);
+    }
+
+    @Test
     void 파일에_내용쓰기() {
         Util.mkdir("test_data");
         Util.saveToFile("test_data/1.json", "내용\n내용");
