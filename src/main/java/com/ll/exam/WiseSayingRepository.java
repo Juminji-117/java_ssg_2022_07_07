@@ -54,6 +54,7 @@ public class WiseSayingRepository {
         foundWiseSaying.author = author;
 
     }
+
 }
 
 
