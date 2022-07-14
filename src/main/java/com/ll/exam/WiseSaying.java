@@ -23,6 +23,7 @@ public class WiseSaying {
 
     //Json 형태로 변환
    public String toJson() {
+        //문자열은 "" 붙이는 것이 Json의 규격
         return """
                 {
                     "id": %d,
